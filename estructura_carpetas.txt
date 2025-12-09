@@ -1,0 +1,71 @@
+inovatie_web/
+│
+├── .htaccess                 # (Nuevo) Redirige todo a index.php
+├── index.php                 # (Nuevo) El único punto de entrada (Router)
+│
+├── app/                      # LÓGICA PRIVADA (Protegido)
+│   ├── config/
+│   │   ├── config.php        # (Viene de config/config.php)
+│   │   └── db.php            # (Viene de lib/db.php)
+│   │
+│   ├── controllers/          # CEREBRO: Reemplaza a la lógica suelta en 'pages/' y 'api/'
+│   │   ├── HomeController.php     # Controla inicio.php
+│   │   ├── ProductController.php  # Controla productos.php, detalle, búsqueda
+│   │   ├── PageController.php     # Controla estáticas (quienes somos, alianzas)
+│   │   ├── ContactController.php  # Controla contacto y formularios
+│   │   ├── AdminController.php    # Reemplaza la carpeta 'admin-lite/'
+│   │   │
+│   │   └── api/              # Para tus llamadas AJAX (Viene de tu carpeta 'api/')
+│   │       ├── CatalogApi.php
+│   │       └── LeadsApi.php
+│   │
+│   ├── models/               # DATOS: Reemplaza tu carpeta 'lib/' (Lógica de negocio)
+│   │   ├── Product.php       # (Viene de lib/catalogo.php)
+│   │   ├── Lead.php          # (Viene de lib/leads.php)
+│   │   ├── Quote.php         # (Viene de lib/cotizaciones.php)
+│   │   └── User.php          # (Para el login de admin)
+│   │
+│   ├── helpers/              # UTILIDADES
+│   │   ├── Security.php      # (Viene de lib/seguridad.php)
+│   │   ├── Paginator.php     # (Viene de lib/paginacion.php)
+│   │   └── Logger.php        # (Viene de lib/logger.php)
+│   │
+│   └── views/                # VISTA: Todo el HTML
+│       ├── layouts/          # Estructuras base
+│       │   ├── main.php      # Plantilla principal (usa head_meta, scripts)
+│       │   └── admin.php     # Plantilla para el panel administrativo
+│       │
+│       ├── partials/         # (Tu carpeta 'partials/' actual)
+│       │   ├── header.php
+│       │   ├── navbar.php
+│       │   ├── footer.php
+│       │   └── breadcrumbs.php
+│       │
+│       ├── pages/            # El contenido HTML limpio de tus archivos en 'pages/'
+│       │   ├── home.php
+│       │   ├── productos/
+│       │   │   ├── index.php
+│       │   │   └── detalle.php
+│       │   ├── legal/
+│       │   │   ├── privacidad.php
+│       │   │   └── terminos.php
+│       │   └── admin/        # Vistas de tu 'admin-lite/' (tablas, login)
+│       │
+│       └── components/       # (Tu carpeta 'components/' actual)
+│           ├── modals/       # (modal_confirm.php, modal_cotizacion.php...)
+│           ├── tables/       # (table_productos.php, table_leads.php...)
+│           ├── forms/        # (form_contacto.php, form_cotizar.php...)
+│           └── cards/        # (card_producto.php, testimonios.php...)
+│
+├── assets/                   # PÚBLICO: (Tu carpeta 'assets/' intacta)
+│   ├── css/
+│   ├── js/
+│   ├── img/
+│   └── fonts/
+│
+├── logs/                     # (Tu carpeta 'logs/' actual)
+│   └── error.app.log
+│
+└── seo/                      # (Tu carpeta 'seo/' actual)
+    ├── robots.txt
+    └── sitemap.xml
