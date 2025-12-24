@@ -1,0 +1,305 @@
+/* =========================================================
+   HERO SLIDER (A) — Breakpoints controlados (estable)
+   Objetivo: Look tipo Cemex
+   - Full ancho (100%)
+   - Imagen cover (impacto)
+   - Altura por breakpoints (predecible)
+   - Textos legibles en fotos claras (Opción A: sombra + micro-contorno)
+   ========================================================= */
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 65vh; /* Desktop base */
+  min-height: 420px; /* Evita que se aplaste demasiado */
+  max-height: 760px; /* Evita que se coma pantallas enormes */
+  overflow: hidden;
+  background: #d7dce2; /* fallback si imagen tarda */
+}
+
+.hero-slider__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Slide base */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* Slide activo (NO cambiar a relative) */
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Fondo (imagen) */
+.hero-slide__media {
+  position: absolute;
+  inset: 0;
+  background: #d7dce2;
+}
+
+.hero-slide__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  /* Estilo Cemex: lleno total, con recorte leve */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay tipo Cemex: gradiente suave (no tapa la foto) */
+.hero-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.14) 42%,
+    rgba(0, 0, 0, 0.06) 62%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Contenido */
+.hero-slide__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: center;
+}
+
+/* “Zona Cemex”: texto cargado a la izquierda */
+.hero-slide__box {
+  width: min(760px, 92%);
+  margin-left: clamp(0px, 4vw, 56px);
+  color: #ffffff;
+}
+
+/* =========================================================
+   OPCIÓN A: contraste profesional SIN caja sólida
+   - Text-shadow suave (lectura)
+   - Micro-contorno (solo para fotos claras)
+   ========================================================= */
+
+/* Título: potente pero controlado */
+.hero-slide__title {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+
+  /* Responsivo controlado */
+  font-size: clamp(1.55rem, 3.2vw, 3.1rem);
+
+  /* Sombra suave (principal) */
+  text-shadow: 0 10px 22px rgba(0, 0, 0, 0.42), 0 2px 6px rgba(0, 0, 0, 0.28);
+
+  /* Micro-contorno (no “borde visible”; solo ayuda en fondos claros) */
+  -webkit-text-stroke: 0.55px rgba(0, 0, 0, 0.22);
+  paint-order: stroke fill;
+}
+
+/* Subtítulo: discreto, sin caja que tape imagen */
+.hero-slide__subtitle {
+  margin: 0.85rem 0 0;
+  font-weight: 500;
+  line-height: 1.35;
+
+  font-size: clamp(1rem, 1.55vw, 1.35rem);
+  max-width: 46ch;
+
+  /* Mantener limpio: sin fondo */
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+
+  /* Contraste con sombra (más ligera que el título) */
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.36), 0 2px 6px rgba(0, 0, 0, 0.24);
+
+  /* Micro-contorno aún más sutil */
+  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.18);
+  paint-order: stroke fill;
+}
+
+/* Flechas */
+.hero-slider__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.hero-slider__nav--prev {
+  left: 1rem;
+}
+.hero-slider__nav--next {
+  right: 1rem;
+}
+
+.hero-slider__nav:hover {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.hero-slider__nav:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.hero-slider__nav::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: block;
+}
+
+.hero-slider__nav--prev::before {
+  transform: rotate(135deg);
+}
+.hero-slider__nav--next::before {
+  transform: rotate(-45deg);
+}
+
+/* Dots */
+.hero-slider__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
+  z-index: 3;
+
+  display: flex;
+  gap: 10px;
+
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hero-slider__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.55);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.hero-slider__dot.is-active {
+  background: #fff;
+  transform: scale(1.12);
+}
+
+/* =========================================================
+   BREAKPOINTS (A)
+   ========================================================= */
+
+/* Pantallas medianas */
+@media (max-width: 991.98px) {
+  .hero-slider {
+    height: 58vh;
+    min-height: 380px;
+    max-height: 680px;
+  }
+  .hero-slide__box {
+    width: min(680px, 94%);
+    margin-left: 24px;
+  }
+}
+
+/* Móvil */
+@media (max-width: 575.98px) {
+  .hero-slider {
+    height: 44vh; /* Adelgaza en vertical */
+    min-height: 320px;
+    max-height: 520px;
+  }
+
+  /* Overlay menos lateral y más general en móvil */
+  .hero-slide::after {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.26) 0%,
+      rgba(0, 0, 0, 0.14) 45%,
+      rgba(0, 0, 0, 0.06) 100%
+    );
+  }
+
+  .hero-slide__content {
+    padding: 1rem 1rem;
+    align-items: flex-end;
+    padding-bottom: 2.3rem;
+  }
+
+  .hero-slide__box {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  /* En móvil bajamos un poco el “peso” sin cambiar mucho el look */
+  .hero-slide__title {
+    font-size: clamp(1.35rem, 5.2vw, 2.1rem);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero-slide__subtitle {
+    max-width: 38ch;
+    font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+    -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.18);
+  }
+
+  .hero-slider__nav {
+    width: 44px;
+    height: 44px;
+  }
+  .hero-slider__nav--prev {
+    left: 0.55rem;
+  }
+  .hero-slider__nav--next {
+    right: 0.55rem;
+  }
+
+  .hero-slider__dots {
+    bottom: 0.95rem;
+    gap: 9px;
+  }
+}

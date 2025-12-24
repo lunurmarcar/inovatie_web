@@ -1,0 +1,12 @@
+# Ignora la carpeta de imágenes
+assets/img/
+
+# Ignora la carpeta de imágenes
+assets/docs/
+
+# Ignora la carpeta de configuración
+app/config/
+
+# Ignora archivos ocultos y temporales
+.env
+*.log
