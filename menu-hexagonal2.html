@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inovatie - Productos</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          #0b2d4d;
+        background-size: 120px 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+      }
+
+      .menu-container {
+        position: relative;
+        width: 800px;
+        height: 600px;
+      }
+
+      /* HEX BASE */
+      .hex {
+        position: absolute;
+        width: 180px;
+        height: 155px;
+        background: linear-gradient(145deg, #123f6d, #0e3154);
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s ease;
+        box-shadow:
+          0 15px 30px rgba(0, 0, 0, 0.5),
+          inset 0 0 10px rgba(255, 255, 255, 0.05);
+      }
+
+      /* CONTENIDO */
+      .hex-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      /* CENTRO */
+      .center {
+        top: 250px;
+        left: 310px;
+        background: radial-gradient(circle, #1c5c8a 0%, #0e3a5d 100%);
+        font-size: 18px;
+        font-weight: 800;
+        animation: pulse 4s infinite ease-in-out;
+      }
+
+      /* POSICIONES */
+      .hex1 {
+        top: 50px;
+        left: 310px;
+      }
+      .hex2 {
+        top: 150px;
+        left: 500px;
+      }
+      .hex3 {
+        top: 350px;
+        left: 500px;
+      }
+      .hex4 {
+        top: 450px;
+        left: 310px;
+      }
+      .hex5 {
+        top: 350px;
+        left: 120px;
+      }
+      .hex6 {
+        top: 150px;
+        left: 120px;
+      }
+
+      /* HOVER SCALE */
+      .menu-container:hover .hex {
+        opacity: 0.4;
+        transform: scale(0.95);
+      }
+      .hex:hover {
+        opacity: 1 !important;
+        transform: scale(1.08);
+      }
+
+      /* HEX BORDER (GUSANITO) */
+      .hex-border {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .hex-border polygon {
+        fill: none;
+        stroke: #7ac943;
+        stroke-width: 3;
+        stroke-dasharray: 50 400;
+        stroke-dashoffset: 0;
+        opacity: 0;
+      }
+
+      .hex:hover .hex-border polygon {
+        opacity: 1;
+        animation: rotateBorder 2s linear infinite;
+      }
+
+      @keyframes rotateBorder {
+        to {
+          stroke-dashoffset: -450;
+        }
+      }
+
+      /* PULSO CENTRO */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 15px rgba(122, 201, 67, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(122, 201, 67, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(122, 201, 67, 0.2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-container">
+      <!-- CENTRO -->
+      <div class="hex center">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          INOVATIE
+          <br />
+          PRODUCTOS
+        </div>
+      </div>
+
+      <!-- HEX 1 -->
+      <div class="hex hex1">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          Aditivos
+          <br />
+          para Concreto
+        </div>
+      </div>
+
+      <!-- HEX 2 -->
+      <div class="hex hex2">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          Sistemas
+          <br />
+          para Concreto
+        </div>
+      </div>
+
+      <!-- HEX 3 -->
+      <div class="hex hex3">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Perforación</div>
+      </div>
+
+      <!-- HEX 4 -->
+      <div class="hex hex4">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Próximamente</div>
+      </div>
+
+      <!-- HEX 5 -->
+      <div class="hex hex5">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          Estabilización
+          <br />
+          de Suelos
+        </div>
+      </div>
+
+      <!-- HEX 6 -->
+      <div class="hex hex6">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          Refuerzo
+          <br />
+          Estructural
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
