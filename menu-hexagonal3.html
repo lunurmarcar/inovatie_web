@@ -1,0 +1,409 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inovatie - Productos</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: #0b2d4d;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .menu-container {
+        position: relative;
+        width: 800px;
+        height: 600px;
+      }
+
+      .hex {
+        width: 180px;
+        height: 155px;
+        background: #123f6d;
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        overflow: visible;
+      }
+
+      .hex-content {
+        position: relative;
+        z-index: 3;
+        width: 62%;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 1.18;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
+      }
+
+      .hex-border {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .hex-border polygon {
+        fill: none;
+        stroke: #1f5f2a;
+        stroke-width: 4;
+        opacity: 0;
+      }
+
+      .hex:hover {
+        background: #7ac943;
+      }
+
+      .hex:hover .hex-content {
+        color: #0f4f7a;
+      }
+
+      .center {
+        top: 250px;
+        left: 310px;
+        background: #1c5c8a;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 0 0 40px rgba(122, 201, 67, 0.3);
+        animation: pulse 4s infinite ease-in-out;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 15px rgba(122, 201, 67, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(122, 201, 67, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(122, 201, 67, 0.2);
+        }
+      }
+
+      .hex1 {
+        top: 50px;
+        left: 310px;
+      }
+      .hex2 {
+        top: 150px;
+        left: 500px;
+      }
+      .hex3 {
+        top: 350px;
+        left: 500px;
+      }
+      .hex4 {
+        top: 450px;
+        left: 310px;
+      }
+      .hex5 {
+        top: 350px;
+        left: 120px;
+      }
+      .hex6 {
+        top: 150px;
+        left: 120px;
+      }
+
+      svg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .menu-container:hover .hex {
+        opacity: 0.6;
+      }
+
+      .hex:hover {
+        opacity: 1 !important;
+      }
+
+      .hex::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        clip-path: inherit;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cline x1='50' y1='6' x2='88' y2='27' stroke='%230f4f7a' stroke-width='3' stroke-linecap='square'/%3E%3Cline x1='88' y1='73' x2='50' y2='94' stroke='%230f4f7a' stroke-width='3' stroke-linecap='square'/%3E%3Cline x1='12' y1='73' x2='12' y2='27' stroke='%230f4f7a' stroke-width='3' stroke-linecap='square'/%3E%3C/svg%3E");
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .hex:hover::after {
+        opacity: 1;
+      }
+
+      .chem-submenu {
+        position: fixed;
+        z-index: 9999;
+        display: none;
+        pointer-events: auto;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: rgba(7, 31, 52, 0.78);
+        border: 1px solid rgba(190, 220, 245, 0.25);
+        backdrop-filter: blur(2px);
+      }
+
+      .chem-submenu.open {
+        display: block;
+      }
+
+      .chem-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 6px 0;
+        padding: 6px 8px;
+        border-radius: 6px;
+        background: rgba(230, 241, 250, 0.09);
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        cursor: pointer;
+      }
+
+      .chem-icon {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        flex: 0 0 22px;
+      }
+
+      .chem-label {
+        font-size: 16px;
+        line-height: 1.2;
+        color: #e7f2fc;
+        background: transparent;
+      }
+
+      .chem-row:hover {
+        background: #7ac943;
+        transform: translateX(2px);
+      }
+
+      .chem-row:hover .chem-label {
+        color: #0f4f7a;
+      }
+
+      body.submenu-active .menu-container .hex {
+        opacity: 0.22 !important;
+      }
+
+      body.submenu-active .menu-container .hex.active-source {
+        opacity: 1 !important;
+        background: #7ac943;
+      }
+
+      body.submenu-active .menu-container .hex.active-source .hex-content {
+        color: #0f4f7a;
+      }
+
+      body.submenu-active .menu-container .hex.active-source::after {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="hex center">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          INOVATIE
+          <br />
+          PRODUCTOS
+        </div>
+      </div>
+
+      <div class="hex hex1" data-portafolio="Aditivos para Concreto">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">
+          Aditivos
+          <br />
+          para Concreto
+        </div>
+      </div>
+      <div class="hex hex2" data-portafolio="Concreto">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Concreto</div>
+      </div>
+      <div class="hex hex3" data-portafolio="Perforación">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Perforación</div>
+      </div>
+      <div class="hex hex4">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Próximamente</div>
+      </div>
+      <div class="hex hex5" data-portafolio="Terracerías">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Terracerías</div>
+      </div>
+      <div class="hex hex6" data-portafolio="Refuerzo de Concreto">
+        <svg class="hex-border" viewBox="0 0 200 173">
+          <polygon points="100,0 186,43 186,130 100,173 14,130 14,43" />
+        </svg>
+        <div class="hex-content">Refuerzo de Concreto</div>
+      </div>
+    </div>
+
+    <div id="chem-submenu" class="chem-submenu" aria-hidden="true"></div>
+
+    <script>
+      const PRODUCTS_PAGE = 'vista-productos.html';
+      const PORTAFOLIO_CATEGORIAS = {
+        'Aditivos para Concreto': ['Bases Químicas', 'Modificadores', 'Acelerantes'],
+        Concreto: ['Químicos'],
+        Perforación: ['Lodos de perforación'],
+        Terracerías: ['Estabilización de suelos'],
+        'Refuerzo de Concreto': ['Fibras sintéticas', 'Fibras metálicas']
+      };
+
+      function goToProducts(portafolio, categoria = '') {
+        const params = new URLSearchParams();
+        params.set('portafolio', portafolio);
+        if (categoria) params.set('categoria', categoria);
+        window.location.href = `${PRODUCTS_PAGE}?${params.toString()}`;
+      }
+
+      function buildChemMenu(container, categorias, onSelect) {
+        container.innerHTML = '';
+        categorias.forEach((nombre) => {
+          const row = document.createElement('button');
+          row.type = 'button';
+          row.className = 'chem-row';
+          row.innerHTML = `
+            <img class="chem-icon" src="assets/img/benceno.png" alt="" />
+            <div class="chem-label">${nombre}</div>
+          `;
+          row.addEventListener('click', () => onSelect(nombre));
+          container.appendChild(row);
+        });
+      }
+
+      function initNavigationFlow() {
+        const submenu = document.getElementById('chem-submenu');
+        const hexes = document.querySelectorAll('.hex[data-portafolio]');
+        const centerHex = document.querySelector('.hex.center');
+        let closeTimer = null;
+        let currentHex = null;
+
+        function closeMenu() {
+          clearTimeout(closeTimer);
+          closeTimer = setTimeout(() => {
+            submenu.classList.remove('open');
+            submenu.setAttribute('aria-hidden', 'true');
+            submenu.innerHTML = '';
+            if (currentHex) currentHex.classList.remove('active-source');
+            currentHex = null;
+            document.body.classList.remove('submenu-active');
+          }, 180);
+        }
+
+        function openMenuForHex(hex, categorias) {
+          clearTimeout(closeTimer);
+          const portafolio = hex.dataset.portafolio;
+
+          buildChemMenu(submenu, categorias, (categoria) => {
+            goToProducts(portafolio, categoria);
+          });
+
+          submenu.classList.add('open');
+          submenu.setAttribute('aria-hidden', 'false');
+
+          const rect = hex.getBoundingClientRect();
+          submenu.style.left = `${rect.right - 10}px`;
+          submenu.style.top = `${rect.top + rect.height / 2 - submenu.offsetHeight / 2}px`;
+
+          if (currentHex) currentHex.classList.remove('active-source');
+          currentHex = hex;
+          currentHex.classList.add('active-source');
+          document.body.classList.add('submenu-active');
+        }
+
+        hexes.forEach((hex) => {
+          hex.addEventListener('mouseenter', () => {
+            const portafolio = hex.dataset.portafolio;
+            const categorias = PORTAFOLIO_CATEGORIAS[portafolio] || [];
+            if (categorias.length) openMenuForHex(hex, categorias);
+          });
+
+          hex.addEventListener('mouseleave', (event) => {
+            const to = event.relatedTarget;
+            if (to && to.closest && to.closest('#chem-submenu')) return;
+            closeMenu();
+          });
+
+          hex.addEventListener('click', () => {
+            const portafolio = hex.dataset.portafolio;
+            goToProducts(portafolio, 'General');
+          });
+        });
+
+        
+        if (centerHex) {
+          centerHex.addEventListener('click', () => {
+            goToProducts('General', 'General');
+          });
+        }
+        submenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+        submenu.addEventListener('mouseleave', closeMenu);
+
+        document.addEventListener('click', (event) => {
+          const clickedHex = event.target.closest('.hex[data-portafolio]');
+          const clickedSubmenu = event.target.closest('#chem-submenu');
+          if (!clickedHex && !clickedSubmenu) closeMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMenu();
+        });
+
+        window.addEventListener('scroll', closeMenu, { passive: true });
+        window.addEventListener('resize', closeMenu);
+      }
+
+      document.addEventListener('DOMContentLoaded', initNavigationFlow);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+

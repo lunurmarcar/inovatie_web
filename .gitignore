@@ -2,7 +2,7 @@
 assets/img/
 
 # Ignora la carpeta de imágenes
-assets/docs/
+assets/docsgit add ./
 
 # Ignora la carpeta de configuración
 app/config/
